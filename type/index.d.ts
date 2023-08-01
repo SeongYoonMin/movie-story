@@ -5,6 +5,12 @@ interface IConfig {
     api_key: string;
   };
 }
+interface IPoster {
+  id: number;
+  src: string;
+  name: string;
+  path: string;
+}
 
 interface IMovieItems {
   adault: boolean;

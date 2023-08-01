@@ -3,13 +3,21 @@
 
 <template>
   <section class="main">
-    
+    <SectionMainTop />
   </section>
 </template>
 
 <style lang="scss" scoped>
 .main {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   box-sizing: border-box;
   padding: 120px 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  row-gap: 120px;
 }
 </style>

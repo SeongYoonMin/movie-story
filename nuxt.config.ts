@@ -17,6 +17,6 @@ export default defineNuxtConfig({
       title: "MOVIE TIME",
     },
   },
-  css: ['~/assets/reset.scss','~/assets/main.scss'],
+  css: ['~/assets/reset.scss','~/assets/main.scss', 'swiper/css', '~/assets/swiper.scss'],
   modules: ["@pinia/nuxt"],
 });
