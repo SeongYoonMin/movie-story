@@ -4,13 +4,13 @@
 <template>
   <section class="main">
     <SectionMainTop />
+    <SectionMomopick />
   </section>
 </template>
 
 <style lang="scss" scoped>
 .main {
   width: 100%;
-  max-width: 1400px;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 120px 0;

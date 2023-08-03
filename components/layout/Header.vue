@@ -43,6 +43,7 @@ const searchEvent = async (values: string) => {
 
 <style lang="scss" scoped>
 #header {
+  z-index: 10;
   position: fixed;
   top: 0;
   right: 0;
@@ -52,6 +53,7 @@ const searchEvent = async (values: string) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #1B1B1B;
   .navigation {
     display: flex;
     align-items: center;
@@ -71,14 +73,14 @@ const searchEvent = async (values: string) => {
       column-gap: 24px;
       .items {
         padding: 8px;
-        font-size: 24px;
+        font-size: 16px;
         font-weight: 500;
         .nav {
           color: white;
           text-decoration: none;
           transition: 0.3s all;
           &:hover {
-            font-size: 27px;
+            font-size: 20px;
             color: #ffc700;
           }
         }

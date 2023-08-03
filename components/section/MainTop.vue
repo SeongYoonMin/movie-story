@@ -21,20 +21,74 @@ const poster = ref<IPoster[]>([
     path: "#none",
   },
 ]);
+
+
+
+const popularMovie = await api(
+  "/movie/popular?language=ko-KR&page=1",
+  "get"
+).then((response) => {
+  return response.data.value?.results.filter((el, index) => {
+    return index < 3;
+  })
+});
+
 </script>
 
 <template>
   <section class="main_top">
-    <div class="today"></div>
+    <div class="today">
+      <div class="today_header">
+        <h2 class="header_title">현재 상영중인 영화 순위</h2>
+        <a href="#none" class="more">
+          <span>더보기</span>
+          <img src="~/assets/images/arrow.svg" alt="더보기" />
+        </a>
+      </div>
+      <div v-if="popularMovie" class="list">
+        <div class="items" v-for="(items, index) in popularMovie" :key="items.id">
+          <p class="no" :class="{ first: index === 0 }">{{ index + 1 }}</p>
+          <NuxtLink class="content" :to="'/movie/' + items.id">
+            <picture class="thumb">
+              <img
+                :src="'https://image.tmdb.org/t/p/w500/' + items.poster_path"
+                :alt="items.title"
+              />
+            </picture>
+            <div class="desc">
+              <div class="text">
+                <h3 class="title">{{ items.title }}</h3>
+                <p class="overview">{{ items.overview }}</p>
+              </div>
+              <div class="info">
+                <p>
+                  평점 <span>{{ items.vote_average }}</span>
+                </p>
+                <p>
+                  <img src="~/assets/images/heart.svg" alt="" /><span>{{
+                    items.vote_count
+                  }}</span>
+                </p>
+                <p>
+                  <span>{{ items.release_date }}</span>
+                </p>
+              </div>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+      <div v-else>오늘의 추천 게시글이 없습니다.</div>
+    </div>
     <div class="poster">
       <ClientOnly>
         <Swiper
           class="list"
           :slidesPerView="'auto'"
           :modules="[$swiper.Autoplay, $swiper.Pagination]"
+          :loop="true"
           :pagination="{
             type: 'fraction',
-            }"
+          }"
           :autoplay="{
             delay: 2000,
             disableOnInteraction: false,
@@ -45,12 +99,8 @@ const poster = ref<IPoster[]>([
               <img :src="items.src" :alt="items.name" class="thumb" />
             </NuxtLink>
           </SwiperSlide>
-          
         </Swiper>
       </ClientOnly>
-      <NuxtLink to="#none"
-            ><img src="~/assets/images/main_only.png" alt="ONLY TIME SALE"
-          /></NuxtLink>
     </div>
   </section>
 </template>
@@ -58,6 +108,9 @@ const poster = ref<IPoster[]>([
 <style lang="scss" scoped>
 .main_top {
   display: grid;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   align-items: flex-start;
   justify-items: center;
   grid-template-columns: repeat(2, 1fr);
@@ -72,6 +125,121 @@ const poster = ref<IPoster[]>([
       width: 100%;
       .thumb {
         max-width: 100%;
+      }
+    }
+  }
+  .today {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 16px;
+    .today_header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      border-top: 1px solid white;
+      padding: 18px 16px;
+      color: white;
+      .header_title {
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: white;
+        text-decoration: none;
+      }
+    }
+    .list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      row-gap: 16px;
+      .items {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        column-gap: 40px;
+        color: white;
+        .no {
+          padding: 8px;
+          font-size: 40px;
+          &.first {
+            color: #ffc700;
+          }
+        }
+        .content {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          column-gap: 16px;
+          .thumb {
+            max-width: 90px;
+            border-radius: 8px;
+            overflow: hidden;
+            img {
+              width: 100%;
+            }
+          }
+          .desc {
+            max-width: 600px;
+            height: 100%;
+            position: relative;
+            padding: 8px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            row-gap: 37px;
+            .title {
+              font-size: 16px;
+              font-weight: 700;
+              color: white;
+              text-decoration: underline;
+              padding-bottom: 8px;
+            }
+            .overview {
+              display: -webkit-box;
+              font-size: 16px;
+              color: #7b7b7b;
+              line-height: 1.2;
+              height: 36px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+            }
+            .info {
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              column-gap: 32px;
+              p {
+                font-size: 16px;
+                line-height: 24px;
+                display: flex;
+                align-content: center;
+              }
+            }
+          }
+          .date {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 16px;
+            color: #7b7b7b;
+          }
+        }
       }
     }
   }
