@@ -1,7 +1,7 @@
 // ISO 3166-1 ko-KR 한국
 
 export default async (url: string, method: any) => {
-  return useFetch<IMovieList>(url, {
+  return useFetch<IMovieList | any>(url, {
     baseURL: "https://api.themoviedb.org/3",
     method: method,
     headers: {

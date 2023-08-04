@@ -22,17 +22,14 @@ const poster = ref<IPoster[]>([
   },
 ]);
 
-
-
 const popularMovie = await api(
   "/movie/popular?language=ko-KR&page=1",
   "get"
 ).then((response) => {
   return response.data.value?.results.filter((el, index) => {
     return index < 3;
-  })
+  });
 });
-
 </script>
 
 <template>
@@ -46,7 +43,11 @@ const popularMovie = await api(
         </a>
       </div>
       <div v-if="popularMovie" class="list">
-        <div class="items" v-for="(items, index) in popularMovie" :key="items.id">
+        <div
+          class="items"
+          v-for="(items, index) in popularMovie"
+          :key="items.id"
+        >
           <p class="no" :class="{ first: index === 0 }">{{ index + 1 }}</p>
           <NuxtLink class="content" :to="'/movie/' + items.id">
             <picture class="thumb">
@@ -192,7 +193,7 @@ const popularMovie = await api(
             }
           }
           .desc {
-            max-width: 600px;
+            flex: 1 1 0;
             height: 100%;
             position: relative;
             padding: 8px 0;
@@ -229,6 +230,20 @@ const popularMovie = await api(
                 line-height: 24px;
                 display: flex;
                 align-content: center;
+                position: relative;
+                &::after {
+                  position: absolute;
+                  content: "";
+                  top: 8px;
+                  right: -15px;
+                  width: 1px;
+                  height: 8px;
+                  display: block;
+                  background-color: #7b7b7b;
+                }
+                &:last-child::after {
+                  display: none;
+                }
               }
             }
           }

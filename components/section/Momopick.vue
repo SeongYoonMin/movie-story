@@ -3,10 +3,10 @@ const { data: trendingList } = await api(
   "/trending/all/week?language=ko-KR",
   "get"
 );
-const trendingMovie = trendingList.value?.results.filter((el) => {
+const trendingMovie = trendingList.value?.results.filter((el:IMovieItems) => {
   return el.media_type === "movie";
 });
-const trendingTv = trendingList.value?.results.filter((el) => {
+const trendingTv = trendingList.value?.results.filter((el:IMovieItems) => {
   return el.media_type === "tv";
 });
 const mediaTypeState = ref<string>("movie");
@@ -94,8 +94,23 @@ const mediaTypeHandleEvent = (state: string) => {
             <picture class="thumb"
               ><img
                 :src="'https://image.tmdb.org/t/p/w500/' + items.poster_path"
-                :alt="items.title"
+                :alt="items.name"
             /></picture>
+            <div class="desc">
+              <div class="info">
+                <h3 class="title">{{ items.name }}</h3>
+                <p class="overview">{{ items.original_name }}</p>
+              </div>
+              <div class="etc">
+                <p>평점 {{ items.vote_average }}</p>
+                <p>
+                  <img src="~/assets/images/heart.svg" alt="하트" />{{
+                    items.vote_count
+                  }}
+                </p>
+                <p>{{ items.first_air_date }}</p>
+              </div>
+            </div>
           </SwiperSlide>
         </Swiper>
       </ClientOnly>
@@ -108,7 +123,7 @@ const mediaTypeHandleEvent = (state: string) => {
   box-sizing: border-box;
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 0 auto 140px;
   .pink_header {
     width: 100%;
     display: flex;
@@ -194,7 +209,7 @@ const mediaTypeHandleEvent = (state: string) => {
           }
         }
         .etc {
-          display:flex;
+          display: flex;
           align-items: center;
           justify-content: flex-start;
           column-gap: 32px;

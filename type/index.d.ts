@@ -22,6 +22,7 @@ interface IMovieItems {
   media_type: string;
   genre_ids: number[];
   original_title: string;
+  original_name: string;
   overview: string;
   popularity: number;
   poster_path: string;

@@ -5,6 +5,7 @@
   <section class="main">
     <SectionMainTop />
     <SectionMomopick />
+    <SectionUpcoming />
   </section>
 </template>
 
@@ -13,7 +14,7 @@
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 120px 0;
+  padding: 40px 0;
   display: flex;
   flex-direction: column;
   align-content: center;
