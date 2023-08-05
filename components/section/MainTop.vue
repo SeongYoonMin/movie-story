@@ -26,7 +26,7 @@ const popularMovie = await api(
   "/movie/popular?language=ko-KR&page=1",
   "get"
 ).then((response) => {
-  return response.data.value?.results.filter((el, index) => {
+  return response.data.value?.results.filter((el:IMovieItems, index:number) => {
     return index < 3;
   });
 });

@@ -4,7 +4,6 @@ const mediaTypeState = ref<string>("movie");
 const mediaTypeHandleEvent = (state: string) => {
   mediaTypeState.value = state;
 };
-console.log(upComingList.value);
 </script>
 
 <template>
