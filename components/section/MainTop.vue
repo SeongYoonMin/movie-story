@@ -29,6 +29,8 @@ const popularMovie = await api(
   return response.data.value?.results.filter((el:IMovieItems, index:number) => {
     return index < 3;
   });
+}).catch((error) => {
+  console.log(error);
 });
 </script>
 
