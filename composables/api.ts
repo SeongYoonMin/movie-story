@@ -2,7 +2,6 @@
 
 export default async (url: string, method: any) => {
   const config = useRuntimeConfig();
-  console.log(config.public.access_token);
   return useFetch<IMovieList | any>(url, {
     baseURL: config.public.movie_url,
     method: method,
@@ -19,7 +18,7 @@ export default async (url: string, method: any) => {
       console.log("onResponse::");
     },
     onResponseError({ request, response, options }) {
-      console.log("onResponseError::");
+      console.log("onResponseError::", response._data.status_message);
     },
   });
 };
