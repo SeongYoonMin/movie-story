@@ -1,12 +1,12 @@
 // ISO 3166-1 ko-KR 한국
 import { UseFetchOptions } from "nuxt/app";
-import { KeyOfRes, KeysOf } from "nuxt/dist/app/composables/asyncData";
-
-import { FetchContext, FetchOptions, FetchResponse } from "ohmyfetch";
+import { FetchContext, FetchOptions, FetchResponse, ofetch } from "ofetch";
 
 // Request 전 Header 처리
 async function onRequest({ options }: FetchContext<any>) {
   const config = useRuntimeConfig();
+  options.baseURL = config.public.movie_url;
+  
   options.headers = {
     accept: "application/json",
     Authorization: "Bearer " + config.public.access_token,
@@ -36,33 +36,22 @@ async function onRequestError({
 
 // Type 지정을 통해 return할때 (url:string, options?: FetchOptions) 형식 유지
 
-export const useApi = <T>(url: string, options?: FetchOptions) => {
-  const config = useRuntimeConfig();
-
-  return $fetch<T>(url, {
-    baseURL: config.public.movie_url,
-    retry: 2,
+export const useApi = <T>(
+  url: string,
+  options?: FetchOptions<T extends ResponseType ? any : any>
+) => {
+  return ofetch<T>(url, {
     ...options,
     onRequest,
     onRequestError,
-    onResponse,
     onResponseError,
   });
 };
-export const useApiFetch = <T>(
-  url: string,
-  options?: UseFetchOptions<
-    T extends void ? unknown : T,
-    (res: T extends void ? unknown : T) => T extends void ? unknown : T,
-    KeyOfRes<(res: T extends void ? unknown : T) => T extends void ? unknown : T>
-  >
-) => {
-  const config = useRuntimeConfig();
-  return useFetch<T>(url, {
-    baseURL: config.public.movie_url,
-    credentials: "include",
+export const useApiFetch = <T>(url: string, options?: UseFetchOptions<T>) => {
+  return useFetch(url, {
     ...options,
     onRequest,
+    onRequestError,
     onResponseError,
   });
 };

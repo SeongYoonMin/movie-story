@@ -11,7 +11,6 @@ const searchQuery = computed(() => {
 
 const { data: searchData } = await useApiFetch<IMovieSearch>("/search/keyword", {
   method: "GET",
-  key: "SearchQuery",
   query: searchQuery,
   watch: [searchQuery],
 });
