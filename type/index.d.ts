@@ -40,3 +40,13 @@ interface IMovieList {
   total_pages?: number;
   total_results?: number;
 }
+
+interface IMovieSearch {
+  page: number;
+  results: {
+    id: number;
+    name: string;
+  }[];
+  total_pages: number;
+  total_results: 22;
+}

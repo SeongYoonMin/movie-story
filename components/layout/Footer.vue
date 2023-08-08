@@ -11,10 +11,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 0;
+  padding: 80px 0;
   p {
-    font-size: 26px;
-    color: white;
+    font-size: 16px;
+    color: #7b7b7b;
   }
 }
 </style>

@@ -1,17 +1,13 @@
 <script setup lang="ts">
 const searchValue = ref<string>("");
+const router = useRouter();
 
-const searchEvent = async (values: string) => {
+const searchEvent = (values: string) => {
   if (values === "") {
     alert("검색어을 입력해주세요.");
     return;
   }
-  await navigateTo({
-    path: "/search",
-    query: {
-      search: values,
-    },
-  });
+  router.push({ path: "/search", query: { query: values } });
 };
 </script>
 
@@ -53,7 +49,7 @@ const searchEvent = async (values: string) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #1B1B1B;
+  background-color: #1b1b1b;
   .navigation {
     display: flex;
     align-items: center;

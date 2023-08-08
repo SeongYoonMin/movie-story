@@ -22,16 +22,12 @@ const poster = ref<IPoster[]>([
   },
 ]);
 
-const popularMovie = await api(
+const { results: popularMovie } = await useApi<IMovieList>(
   "/movie/popular?language=ko-KR&page=1",
-  "get"
-).then((response) => {
-  return response.data.value?.results.filter((el:IMovieItems, index:number) => {
-    return index < 3;
-  });
-}).catch((error) => {
-  console.log(error);
-});
+  {
+    method: "get",
+  }
+);
 </script>
 
 <template>
@@ -47,7 +43,7 @@ const popularMovie = await api(
       <div v-if="popularMovie" class="list">
         <div
           class="items"
-          v-for="(items, index) in popularMovie"
+          v-for="(items, index) in popularMovie.slice(0, 3)"
           :key="items.id"
         >
           <p class="no" :class="{ first: index === 0 }">{{ index + 1 }}</p>

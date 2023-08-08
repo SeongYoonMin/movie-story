@@ -1,12 +1,15 @@
 <script setup lang="ts">
-const { data: trendingList } = await api(
+
+const { results: trendingList } = await useApi<IMovieList>(
   "/trending/all/week?language=ko-KR",
-  "get"
+  {
+    method: "get",
+  }
 );
-const trendingMovie = trendingList.value?.results.filter((el:IMovieItems) => {
+const trendingMovie = trendingList.filter((el:IMovieItems) => {
   return el.media_type === "movie";
 });
-const trendingTv = trendingList.value?.results.filter((el:IMovieItems) => {
+const trendingTv = trendingList.filter((el:IMovieItems) => {
   return el.media_type === "tv";
 });
 const mediaTypeState = ref<string>("movie");

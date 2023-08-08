@@ -5,7 +5,7 @@
   <section class="main">
     <SectionMainTop />
     <SectionMomopick />
-    <!-- <SectionUpcoming /> -->
+    <SectionUpcoming />
   </section>
 </template>
 

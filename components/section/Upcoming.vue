@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const { data: upComingList } = await api("/movie/upcoming", "get");
-const mediaTypeState = ref<string>("movie");
-const mediaTypeHandleEvent = (state: string) => {
-  mediaTypeState.value = state;
-};
+const { results: upComingList } = await useApi<IMovieList>("/movie/upcoming", {
+  method: "get",
+});
+// const mediaTypeState = ref<string>("movie");
+// const mediaTypeHandleEvent = (state: string) => {
+//   mediaTypeState.value = state;
+// };
 </script>
 
 <template>
@@ -14,9 +16,13 @@ const mediaTypeHandleEvent = (state: string) => {
 
     <div class="upcoming_list" v-if="upComingList">
       <ClientOnly>
-        <Swiper v-if="upComingList.results" class="list" :slidesPerView="2" :spaceBetween="40">
-          
-          <SwiperSlide v-for="items in upComingList.results"
+        <Swiper
+          v-if="upComingList"
+          class="list"
+          :slidesPerView="2"
+          :spaceBetween="40"
+        >
+          <SwiperSlide v-for="items in upComingList"
             ><picture class="thumb"
               ><img
                 :src="'https://image.tmdb.org/t/p/w500/' + items.poster_path"
