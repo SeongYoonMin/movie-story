@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+// SearchProps 추가 예정
+defineProps();
+
+</script>
 
 <template>
   <section id="search">
