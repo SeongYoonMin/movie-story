@@ -43,10 +43,16 @@ interface IMovieList {
 
 interface IMovieSearch {
   page: number;
-  results: {
-    id: number;
-    name: string;
-  }[];
+  results: IMovieItems[];
   total_pages: number;
   total_results: 22;
+}
+interface ISearchQuery {
+  query: string;
+  language: string;
+  page: number;
+  region: string;
+  include_adult: "true" | "false";
+  primary_release_year: string;
+  year: string;
 }
