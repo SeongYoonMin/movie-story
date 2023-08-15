@@ -1,13 +1,28 @@
 <script setup lang="ts">
+interface ISearchProps {
+  search_value: string;
+  search_type: string;
+}
+const props = defineProps<ISearchProps>();
+const inputValue = ref<string>(props.search_value);
+const emits = defineEmits<{
+  (e: "update:value", value:string): void
+  (e: "submit:value", value:string): void
+}>();
 
-// SearchProps 추가 예정
-defineProps();
+// 검색어 변경 이벤트
+const changeInputValue = () => {
+  emits("update:value", inputValue.value);
+};
 
+const submitValueEvent = () => {
+  emits("submit:value", "");
+}
 </script>
 
 <template>
   <section id="search">
-    <form action="" class="search_form">
+    <form @submit.prevent="submitValueEvent" class="search_form">
       <legend class="sr-only">검색</legend>
       <div class="header">
         <div class="left">
@@ -17,19 +32,24 @@ defineProps();
             <img src="~/assets/images/filter_clear.svg" alt="" />
           </button>
         </div>
-        <button type="button" class="right">검색</button>
+        <button type="submit" class="right">검색</button>
       </div>
       <div class="filter">
         <label for="" class="filter_keyword"
           ><h3>검색어</h3>
-          <input type="text" placeholder="검색어를 입력해주세요." required
+          <input
+            type="text"
+            placeholder="검색어를 입력해주세요."
+            required
+            v-model="inputValue"
+            @input="changeInputValue"
         /></label>
-        <div class="filter_genre">
+        <!-- <div class="filter_genre">
           <h3>장르</h3>
           <div class="list">
             <input type="radio" name="" value="" checked />
           </div>
-        </div>
+        </div> -->
       </div>
     </form>
   </section>

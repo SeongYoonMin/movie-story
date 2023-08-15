@@ -10,7 +10,7 @@ const searchQuery = computed(() => {
   };
 });
 
-const { data: searchData } = await useApiFetch<IMovieSearch>("/search/keyword", {
+const { data: searchData } = await useApiFetch<IMovieSearch>("/search/movie", {
   method: "GET",
   query: searchQuery,
   watch: [searchQuery],
@@ -19,7 +19,7 @@ const { data: searchData } = await useApiFetch<IMovieSearch>("/search/keyword", 
 
 <template>
   <main id="search">
-    <SectionSearch></SectionSearch>
+    <!-- <SectionSearch :search_type="'asdf'" :search_value="'asdf'"></SectionSearch> -->
     <section v-if="searchData">
       <div v-for="items in searchData.results">{{ items.name }}</div>
     </section>
