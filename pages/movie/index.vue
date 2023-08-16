@@ -1,13 +1,22 @@
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
-const searchType = ref<string>("");
 const searchValue = ref<string>(route.query.query?.toString() || ""); // 검색어
 const searchYear = ref<string>(route.query.primary_release_year?.toString() || ""); // 출시일
 const searchRegion = ref<string>(route.query.region?.toString() || ""); // 지역?
+
+// METHOD
+
 const updateSearchValue = (value: string) => {
   searchValue.value = value;
 };
+const updateSearchYear = (value:string) => {
+  searchYear.value = value;
+}
+const updateSearchRegion = (value:string) => {
+  console.log(value);
+  searchRegion.value = value;
+}
 
 const searchQuery = computed(() => {
   const {
@@ -33,16 +42,19 @@ const { data: searchData } = await useApiFetch<IMovieSearch>("/search/movie", {
   watch: [searchQuery],
 });
 const submitEvent = () => {
-  router.push({ path: "/test", query: { query: searchValue.value } });
+  router.push({ path: "/movie", query: { query: searchValue.value, region: searchRegion.value, year: searchYear.value } });
 };
 </script>
 
 <template>
   <section class="movie">
     <SectionSearch
-      :search_type="searchType"
       :search_value="searchValue"
+      :search_year="searchYear"
+      :search_region="searchRegion"
       @update:value="updateSearchValue"
+      @update:region="updateSearchRegion"
+      @update:year="updateSearchYear"
       @submit:value="submitEvent"
     ></SectionSearch>
     <div v-if="searchData" class="data">
