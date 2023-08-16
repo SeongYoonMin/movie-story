@@ -1,23 +1,36 @@
 <script setup lang="ts">
 interface ISearchProps {
   search_value: string;
-  search_type: string;
+  search_year: string;
+  search_region: string;
 }
 const props = defineProps<ISearchProps>();
 const inputValue = ref<string>(props.search_value);
+const inputYear = ref<string>(props.search_year);
+const inputRegion = ref<string>(props.search_region);
 const emits = defineEmits<{
-  (e: "update:value", value:string): void
-  (e: "submit:value", value:string): void
+  (e: "update:value", value: string): void;
+  (e: "update:year", value: string): void;
+  (e: "update:region", value: string): void;
+  (e: "submit:value", value: string): void;
 }>();
 
 // 검색어 변경 이벤트
 const changeInputValue = () => {
   emits("update:value", inputValue.value);
 };
-
+// 년도 변경
+const changeInputYear = () => {
+  emits("update:year", inputYear.value);
+};
+// 나라 변경
+watch(inputRegion, (region) => {
+  emits("update:region", inputRegion.value);
+});
+// 검색 버튼
 const submitValueEvent = () => {
   emits("submit:value", "");
-}
+};
 </script>
 
 <template>
@@ -44,12 +57,18 @@ const submitValueEvent = () => {
             v-model="inputValue"
             @input="changeInputValue"
         /></label>
-        <!-- <div class="filter_genre">
-          <h3>장르</h3>
-          <div class="list">
-            <input type="radio" name="" value="" checked />
-          </div>
-        </div> -->
+        <div class="filter_region">
+          <h3>지역</h3>
+          <select name="지역" v-model="inputRegion" id="regionSelect">
+            <option
+              v-for="items in regions"
+              :value="items.iso_3166_1"
+              class="regions_items"
+            >
+              {{ items.native_name }}
+            </option>
+          </select>
+        </div>
       </div>
     </form>
   </section>
@@ -98,6 +117,9 @@ const submitValueEvent = () => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+    padding: 16px 0;
+    row-gap: 16px;
     .filter_keyword {
       display: flex;
       width: 100%;
@@ -105,7 +127,7 @@ const submitValueEvent = () => {
       justify-content: flex-start;
       width: 100%;
       column-gap: 24px;
-      padding: 16px 0;
+
       h3 {
         padding: 8px 16px;
       }
@@ -114,9 +136,41 @@ const submitValueEvent = () => {
         background-color: transparent;
         padding: 12px 16px;
         flex: 1 1 0%;
-        max-width: 280px;
         border-radius: 50px;
         color: white;
+      }
+    }
+    .filter_region {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      column-gap: 24px;
+      h3 {
+        width: 80px;
+        box-sizing: border-box;
+        padding: 8px 16px;
+      }
+      #regionSelect {
+        border: 1px solid white;
+        background-color: transparent;
+        padding: 12px 16px;
+        flex: 1 1 0%;
+        border-radius: 50px;
+        color: white;
+        -moz-appearance: none; /* Firefox */
+        -webkit-appearance: none; /* Safari and Chrome */
+        appearance: none; /* 화살표 없애기 공통*/
+        cursor: pointer;
+        background-image: url('../assets/images/bottom_arrow.svg');
+        background-repeat: no-repeat;
+        background-position: 98% 50%;
+        
+        option {
+          color: black;
+          background-color: transparent;
+        }
       }
     }
   }
