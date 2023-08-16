@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-require('dotenv').config();
+require("dotenv").config();
 
 export default defineNuxtConfig({
   typescript: {
@@ -9,8 +9,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       movie_url: process.env.TMDB_URL,
-      access_token:
-        process.env.ACCESS_TOKEN,
+      access_token: process.env.ACCESS_TOKEN,
       api_key: process.env.API_KEY,
     },
   },
@@ -19,6 +18,14 @@ export default defineNuxtConfig({
       title: "MOVIE TIME",
     },
   },
-  css: ['~/assets/reset.scss','~/assets/main.scss', 'swiper/css', '~/assets/swiper.scss'],
+  css: [
+    "~/assets/reset.scss",
+    "~/assets/main.scss",
+    "swiper/css",
+    "~/assets/swiper.scss",
+  ],
   modules: ["@pinia/nuxt"],
+  build: {
+    transpile: ["@vuepic/vue-datepicker"],
+  },
 });
