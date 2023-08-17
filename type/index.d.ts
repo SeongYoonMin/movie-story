@@ -45,7 +45,7 @@ interface IMovieSearch {
   page: number;
   results: IMovieItems[];
   total_pages: number;
-  total_results: 22;
+  total_results: number;
 }
 interface ISearchQuery {
   query: string;
