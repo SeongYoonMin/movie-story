@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import dayjs from 'dayjs';
+
 interface ISearchProps {
   search_value: string;
   search_year: string;
@@ -6,7 +8,7 @@ interface ISearchProps {
 }
 const props = defineProps<ISearchProps>();
 const inputValue = ref<string>(props.search_value);
-const inputYear = ref<string>(props.search_year);
+const inputYear = ref<string>(props.search_year === "" ? dayjs().year().toString() : props.search_year);
 const inputRegion = ref<string>(props.search_region);
 const emits = defineEmits<{
   (e: "update:value", value: string): void;
@@ -20,8 +22,8 @@ const changeInputValue = () => {
   emits("update:value", inputValue.value);
 };
 // 년도 변경
-const changeInputYear = () => {
-  emits("update:year", inputYear.value);
+const changeInputYear = (modelData: number) => {
+  emits("update:year", inputYear.value.toString());
 };
 // 나라 변경
 watch(inputRegion, (region) => {
@@ -68,6 +70,10 @@ const submitValueEvent = () => {
               {{ items.native_name }}
             </option>
           </select>
+        </div>
+        <div class="filter_year">
+          <h3>출시년도</h3>
+          <DatePicker year-picker v-model="inputYear" @update:model-value="changeInputYear" />
         </div>
       </div>
     </form>
@@ -129,6 +135,8 @@ const submitValueEvent = () => {
       column-gap: 24px;
 
       h3 {
+        width: 120px;
+        box-sizing: border-box;
         padding: 8px 16px;
       }
       input {
@@ -136,8 +144,10 @@ const submitValueEvent = () => {
         background-color: transparent;
         padding: 12px 16px;
         flex: 1 1 0%;
+        box-sizing: border-box;
         border-radius: 50px;
         color: white;
+        max-width: 380px;
       }
     }
     .filter_region {
@@ -148,7 +158,7 @@ const submitValueEvent = () => {
       width: 100%;
       column-gap: 24px;
       h3 {
-        width: 80px;
+        width: 120px;
         box-sizing: border-box;
         padding: 8px 16px;
       }
@@ -157,13 +167,14 @@ const submitValueEvent = () => {
         background-color: transparent;
         padding: 12px 16px;
         flex: 1 1 0%;
+        max-width: 380px;
         border-radius: 50px;
         color: white;
         -moz-appearance: none; /* Firefox */
         -webkit-appearance: none; /* Safari and Chrome */
         appearance: none; /* 화살표 없애기 공통*/
         cursor: pointer;
-        background-image: url('../assets/images/bottom_arrow.svg');
+        background-image: url('~/assets/images/bottom_arrow.svg');
         background-repeat: no-repeat;
         background-position: 98% 50%;
         
@@ -171,6 +182,19 @@ const submitValueEvent = () => {
           color: black;
           background-color: transparent;
         }
+      }
+    }
+    .filter_year {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      column-gap: 24px;
+      h3 {
+        width: 120px;
+        box-sizing: border-box;
+        padding: 8px 16px;
       }
     }
   }
