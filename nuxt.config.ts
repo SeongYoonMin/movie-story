@@ -16,6 +16,17 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "MOVIE TIME",
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css",
+        },
+        {
+          rel: "stylesheet",
+          as: "style",
+          href: "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
+        }
+      ],
     },
   },
   css: [
@@ -23,6 +34,7 @@ export default defineNuxtConfig({
     "~/assets/main.scss",
     "swiper/css",
     "~/assets/swiper.scss",
+    "~/assets/datepicker.scss",
   ],
   modules: ["@pinia/nuxt"],
   build: {
