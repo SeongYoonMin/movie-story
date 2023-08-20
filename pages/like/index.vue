@@ -31,7 +31,7 @@ const searchQuery = computed(() => {
     year: year?.toString() || "",
   };
 });
-const { data: searchData } = await useApiFetch<IMovieSearch>("/search/movie", {
+const { data: searchData } = await useApiFetch<IMovieSearch>("/search/like", {
   method: "GET",
   query: searchQuery,
   watch: [searchQuery],
@@ -39,7 +39,7 @@ const { data: searchData } = await useApiFetch<IMovieSearch>("/search/movie", {
 
 const submitEvent = () => {
   router.push({
-    path: "/movie",
+    path: "/like",
     query: {
       query: searchValue.value,
       region: searchRegion.value,
