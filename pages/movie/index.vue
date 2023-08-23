@@ -67,9 +67,7 @@ const submitEvent = () => {
         <strong>{{ searchData.total_results.toLocaleString("ko-KR") }}</strong
         >건 입니다.
       </p>
-      <div v-for="(items, index) in searchData.results" :key="index">
-        {{ items.title }}
-      </div>
+      <SectionSearchList :results="searchData.results"></SectionSearchList>
       <SectionPagination v-if="searchData.page" :page="searchData.page" :total="searchData.total_pages"></SectionPagination>
     </div>
   </section>
