@@ -29,7 +29,7 @@ const lastEventHandle = (value: number) => {
 </script>
 
 <template>
-  <section class="pagination" v-if="totalPage > 1">
+  <section class="pagination" v-if="totalPage && totalPage > 1 ">
     <button
       type="button"
       @click="firstEventHandle(1)"
