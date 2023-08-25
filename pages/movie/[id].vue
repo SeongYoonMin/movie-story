@@ -1,11 +1,17 @@
 <script setup lang="ts">
 const route = useRoute();
-console.log(route.params.id);
+const config = useRuntimeConfig();
+const { data: searchData } = await useApiFetch<IMovieDetail>(
+  "/movie/" + route.params.id,
+  {
+    method: "GET",
+  }
+);
 </script>
 
 <template>
-  <section>
-    <p></p>
+  <section v-if="searchData">
+    <picture><img :src="config.public.img_url + searchData.poster_path" alt=""></picture>
   </section>
 </template>
 
