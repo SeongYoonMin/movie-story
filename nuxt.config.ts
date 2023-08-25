@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
+      img_url: process.env.IMG_URL,
       movie_url: process.env.TMDB_URL,
       access_token: process.env.ACCESS_TOKEN,
       api_key: process.env.API_KEY,
