@@ -13,7 +13,7 @@ interface IPoster {
 }
 
 interface IMovieItems {
-  adault: boolean;
+  adult: boolean;
   backdrop_path: string;
   id: number;
   title: string;
