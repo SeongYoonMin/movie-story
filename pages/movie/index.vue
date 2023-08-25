@@ -48,6 +48,10 @@ const submitEvent = () => {
     },
   });
 };
+
+const eventDetail = (id: number) => {
+  router.push('/movie/' + id);
+}
 </script>
 
 <template>
@@ -67,7 +71,7 @@ const submitEvent = () => {
         <strong>{{ searchData.total_results.toLocaleString("ko-KR") }}</strong
         >건 입니다.
       </p>
-      <SectionSearchList :results="searchData.results"></SectionSearchList>
+      <SectionSearchList :results="searchData.results" :media_type="'movie'" @event:detail="eventDetail"></SectionSearchList>
       <SectionPagination v-if="searchData.page" :page="searchData.page" :total="searchData.total_pages"></SectionPagination>
     </div>
   </section>
