@@ -60,26 +60,28 @@ const mediaTypeHandleEvent = (state: string) => {
             v-for="items in trendingMovie"
             :key="items.id"
           >
-            <picture class="thumb"
-              ><img
-                :src="'https://image.tmdb.org/t/p/w500/' + items.poster_path"
-                :alt="items.title"
-            /></picture>
-            <div class="desc">
-              <div class="info">
-                <h3 class="title">{{ items.title }}</h3>
-                <p class="overview">{{ items.original_title }}</p>
+            <NuxtLink :to="'/movie/' + items.id">
+              <picture class="thumb"
+                ><img
+                  :src="'https://image.tmdb.org/t/p/w500/' + items.poster_path"
+                  :alt="items.title"
+              /></picture>
+              <div class="desc">
+                <div class="info">
+                  <h3 class="title">{{ items.title }}</h3>
+                  <p class="overview">{{ items.original_title }}</p>
+                </div>
+                <div class="etc">
+                  <p>평점 {{ items.vote_average }}</p>
+                  <p>
+                    <img src="~/assets/images/heart.svg" alt="하트" />{{
+                      items.vote_count
+                    }}
+                  </p>
+                  <p>{{ items.release_date }}</p>
+                </div>
               </div>
-              <div class="etc">
-                <p>평점 {{ items.vote_average }}</p>
-                <p>
-                  <img src="~/assets/images/heart.svg" alt="하트" />{{
-                    items.vote_count
-                  }}
-                </p>
-                <p>{{ items.release_date }}</p>
-              </div>
-            </div>
+            </NuxtLink>
           </SwiperSlide>
         </Swiper>
 
@@ -94,26 +96,28 @@ const mediaTypeHandleEvent = (state: string) => {
             v-for="items in trendingTv"
             :key="items.id"
           >
-            <picture class="thumb"
-              ><img
-                :src="'https://image.tmdb.org/t/p/w500/' + items.poster_path"
-                :alt="items.name"
-            /></picture>
-            <div class="desc">
-              <div class="info">
-                <h3 class="title">{{ items.name }}</h3>
-                <p class="overview">{{ items.original_name }}</p>
+            <NuxtLink :to="'/drama/'+items.id">
+              <picture class="thumb"
+                ><img
+                  :src="'https://image.tmdb.org/t/p/w500/' + items.poster_path"
+                  :alt="items.name"
+              /></picture>
+              <div class="desc">
+                <div class="info">
+                  <h3 class="title">{{ items.name }}</h3>
+                  <p class="overview">{{ items.original_name }}</p>
+                </div>
+                <div class="etc">
+                  <p>평점 {{ items.vote_average }}</p>
+                  <p>
+                    <img src="~/assets/images/heart.svg" alt="하트" />{{
+                      items.vote_count
+                    }}
+                  </p>
+                  <p>{{ items.first_air_date }}</p>
+                </div>
               </div>
-              <div class="etc">
-                <p>평점 {{ items.vote_average }}</p>
-                <p>
-                  <img src="~/assets/images/heart.svg" alt="하트" />{{
-                    items.vote_count
-                  }}
-                </p>
-                <p>{{ items.first_air_date }}</p>
-              </div>
-            </div>
+            </NuxtLink>
           </SwiperSlide>
         </Swiper>
       </ClientOnly>
