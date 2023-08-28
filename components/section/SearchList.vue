@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface ISearchProps {
   media_type: string;
-  results: IMovieItems[];
+  results: ISearchItems[];
 }
 const props = defineProps<ISearchProps>();
 const emits = defineEmits<{
