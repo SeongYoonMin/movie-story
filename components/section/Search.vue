@@ -2,14 +2,15 @@
 import dayjs from 'dayjs';
 
 interface ISearchProps {
+  search_type: string;
   search_value: string;
   search_year: string;
-  search_region: string;
+  search_region?: string;
 }
 const props = defineProps<ISearchProps>();
 const inputValue = ref<string>(props.search_value);
 const inputYear = ref<string>(props.search_year === "" ? dayjs().year().toString() : props.search_year);
-const inputRegion = ref<string>(props.search_region);
+const inputRegion = ref<string>(props.search_region?.toString() || "");
 const emits = defineEmits<{
   (e: "update:value", value: string): void;
   (e: "update:year", value: string): void;
@@ -59,7 +60,7 @@ const submitValueEvent = () => {
             v-model="inputValue"
             @input="changeInputValue"
         /></label>
-        <div class="filter_region">
+        <div class="filter_region" v-if="props.search_type === 'movie'">
           <h3>지역</h3>
           <select name="지역" v-model="inputRegion" id="regionSelect">
             <option
