@@ -50,13 +50,14 @@ const submitEvent = () => {
 };
 
 const eventDetail = (id: number) => {
-  router.push('/movie/' + id);
-}
+  router.push("/movie/" + id);
+};
 </script>
 
 <template>
   <section class="movie">
     <SectionSearch
+      :search_type="'movie'"
       :search_value="searchValue"
       :search_year="searchYear"
       :search_region="searchRegion"
@@ -71,8 +72,16 @@ const eventDetail = (id: number) => {
         <strong>{{ searchData.total_results.toLocaleString("ko-KR") }}</strong
         >건 입니다.
       </p>
-      <SectionSearchList :results="searchData.results" :media_type="'movie'" @event:detail="eventDetail"></SectionSearchList>
-      <SectionPagination v-if="searchData.page" :page="searchData.page" :total="searchData.total_pages"></SectionPagination>
+      <SectionSearchList
+        :results="searchData.results"
+        :media_type="'movie'"
+        @event:detail="eventDetail"
+      ></SectionSearchList>
+      <SectionPagination
+        v-if="searchData.page"
+        :page="searchData.page"
+        :total="searchData.total_pages"
+      ></SectionPagination>
     </div>
   </section>
 </template>
