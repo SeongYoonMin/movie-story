@@ -8,21 +8,21 @@ export const navigation = ref<INavigation[]>([
   {
     id: 0,
     name: "개봉/오픈 예정",
-    href: "open",
+    href: "/open",
   },
   {
     id: 1,
     name: "드라마",
-    href: "drama",
+    href: "/drama",
   },
   {
     id: 2,
     name: "영화",
-    href: "movie",
+    href: "/movie",
   },
-  {
-    id: 3,
-    name: "내가 찜한 콘텐츠",
-    href: "like",
-  },
+  // {
+  //   id: 3,
+  //   name: "내가 찜한 콘텐츠",
+  //   href: "/like",
+  // },
 ]);
