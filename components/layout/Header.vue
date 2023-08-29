@@ -1,15 +1,4 @@
-<script setup lang="ts">
-const searchValue = ref<string>("");
-const router = useRouter();
-
-const searchEvent = (values: string) => {
-  if (values === "") {
-    alert("검색어을 입력해주세요.");
-    return;
-  }
-  router.push({ path: "/search", query: { query: values } });
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <header id="header">
@@ -23,17 +12,6 @@ const searchEvent = (values: string) => {
         </li>
       </ul>
     </nav>
-    <form class="search_box" @submit.prevent="searchEvent(searchValue)">
-      <input
-        type="text"
-        placeholder="검색어을 입력해주세요."
-        class="search_input"
-        v-model="searchValue"
-      />
-      <button type="submit" class="search_button" title="검색 버튼">
-        <img src="~/assets/images/search.png" alt="검색버튼" />
-      </button>
-    </form>
   </header>
 </template>
 
