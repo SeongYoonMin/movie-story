@@ -13,7 +13,7 @@ const searchQuery = computed(() => {
     page: page?.toString() || 1,
   };
 });
-const { data: nowPlaying } = await useApiFetch<IMovieSearch>("/search/now_playing", {
+const { data: nowPlaying } = await useApiFetch<INowPlayingMovieList>("/search/now_playing", {
   method: "GET",
   query: searchQuery,
   watch: [searchQuery],
