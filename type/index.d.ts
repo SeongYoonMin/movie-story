@@ -199,7 +199,7 @@ interface INowPlayingSearch {
   language: string;
   region: string;
 }
-interface INowPlayingList {
+interface INowPlayingMovieList {
   dates: {
     maximum: string;
     minimum: string;
@@ -216,5 +216,11 @@ interface INowPlayingList {
     popularity: number;
     poster_path: string;
     release_date: string;
-  }[]
+    title: string;
+    video: boolean;
+    vote_average: number;
+    vote_count: number;
+  }[];
+  total_pages: number;
+  total_results: number;
 }
