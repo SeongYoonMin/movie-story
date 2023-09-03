@@ -19,16 +19,16 @@ const mediaTypeHandleEvent = (state: string) => {
 </script>
 
 <template>
-  <section class="pink">
+  <section class="pick">
     <template v-if="trendingList">
-      <div class="pink_header">
+      <div class="pick_header">
         <h2 class="header_title">모모에서 추천하는 작품도 만나보세요!</h2>
         <NuxtLink to="/movie" class="more">
           <span>더보기</span>
           <img src="~/assets/images/arrow.svg" alt="" />
         </NuxtLink>
       </div>
-      <div class="pink_type">
+      <div class="pick_type">
         <button
           type="button"
           @click="mediaTypeHandleEvent('movie')"
@@ -126,12 +126,12 @@ const mediaTypeHandleEvent = (state: string) => {
 </template>
 
 <style lang="scss" scoped>
-.pink {
+.pick {
   box-sizing: border-box;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto 140px;
-  .pink_header {
+  .pick_header {
     width: 100%;
     display: flex;
     align-items: center;
@@ -153,7 +153,7 @@ const mediaTypeHandleEvent = (state: string) => {
       text-decoration: none;
     }
   }
-  .pink_type {
+  .pick_type {
     display: flex;
     width: 100%;
     align-items: center;
