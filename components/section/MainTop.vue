@@ -35,7 +35,7 @@ const { results: popularMovie } = await useApi<IMovieList>(
     <div class="today">
       <div class="today_header">
         <h2 class="header_title">현재 상영중인 영화 순위</h2>
-        <a href="#none" class="more">
+        <a href="/open" class="more">
           <span>더보기</span>
           <img src="~/assets/images/arrow.svg" alt="더보기" />
         </a>

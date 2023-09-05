@@ -23,7 +23,7 @@ const mediaTypeHandleEvent = (state: string) => {
     <template v-if="trendingList">
       <div class="pick_header">
         <h2 class="header_title">모모에서 추천하는 작품도 만나보세요!</h2>
-        <NuxtLink to="/movie" class="more">
+        <NuxtLink :to="mediaTypeState === 'tv' ? '/drama' : '/movie'" class="more">
           <span>더보기</span>
           <img src="~/assets/images/arrow.svg" alt="" />
         </NuxtLink>
