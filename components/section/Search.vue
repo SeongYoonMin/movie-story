@@ -51,9 +51,11 @@ const submitValueEvent = () => {
         <button type="submit" class="right">검색</button>
       </div>
       <div class="filter">
-        <label for="" class="filter_keyword"
+        <label for="Keyword" class="filter_keyword"
           ><h3>검색어</h3>
           <input
+            id="Keyword"
+            name="Keyword"
             type="text"
             placeholder="검색어를 입력해주세요."
             required
