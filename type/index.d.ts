@@ -215,8 +215,7 @@ interface IOpenUpcomingResult {
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
-[];
+};
 
 interface INowPlayingMovieList {
   dates: {
@@ -224,7 +223,7 @@ interface INowPlayingMovieList {
     minimum: string;
   };
   page: number;
-  result: IOpenUpcomingResult;
+  results: IOpenUpcomingResult[];
   total_pages: number;
   total_results: number;
 }
@@ -234,7 +233,7 @@ interface IUpcomingMovieList {
     minimum: string;
   };
   page: number;
-  result: IOpenUpcomingResult;
+  results: IOpenUpcomingResult[];
   total_pages: number;
   total_results: number;
 }

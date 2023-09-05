@@ -10,7 +10,7 @@ interface ISearchProps {
 const props = defineProps<ISearchProps>();
 const inputValue = ref<string>(props.search_value);
 const inputYear = ref<string>(props.search_year === "" ? dayjs().year().toString() : props.search_year);
-const inputRegion = ref<string>(props.search_region?.toString() || "");
+const inputRegion = ref<string>(props.search_region?.toString() || "KR");
 const emits = defineEmits<{
   (e: "update:value", value: string): void;
   (e: "update:year", value: string): void;
