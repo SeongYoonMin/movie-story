@@ -92,7 +92,7 @@ const [{ data: nowPlaying }, { data: upComing }] = await Promise.all([
 .movie_list {
   width: 100%;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding: 40px 20px;
   .title {
     font-size: 24px;
     line-height: 1.25;
