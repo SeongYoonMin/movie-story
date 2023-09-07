@@ -9,6 +9,9 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.15",
+    "@babel/preset-env": "^7.22.15",
     "@nuxt/devtools": "latest",
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5"
