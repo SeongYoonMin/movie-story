@@ -20,9 +20,4 @@ export const navigation = ref<INavigation[]>([
     name: "영화",
     href: "/movie",
   },
-  // {
-  //   id: 3,
-  //   name: "내가 찜한 콘텐츠",
-  //   href: "/like",
-  // },
 ]);
