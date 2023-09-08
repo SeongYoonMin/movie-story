@@ -39,6 +39,6 @@ export default defineNuxtConfig({
   ],
   modules: ["@pinia/nuxt"],
   build: {
-    transpile: ["@vuepic/vue-datepicker"],
+    transpile: ["@vuepic/vue-datepicker", "@babel/preset-env"],
   },
 });
