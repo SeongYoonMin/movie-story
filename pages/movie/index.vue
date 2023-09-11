@@ -52,6 +52,19 @@ const submitEvent = () => {
 const eventDetail = (id: number) => {
   router.push("/movie/" + id);
 };
+
+const updatePaginationFirst = (value: number) => {
+  console.log(value);
+};
+const updatePaginationLast = (value: number) => {
+  console.log(value);
+};
+const updatePaginationPrev = (value: number) => {
+  console.log(value);
+};
+const updatePaginationNext = (value: number) => {
+  console.log(value);
+};
 </script>
 
 <template>
@@ -81,6 +94,10 @@ const eventDetail = (id: number) => {
         v-if="searchData.page"
         :page="searchData.page"
         :total="searchData.total_pages"
+        @update:first="updatePaginationFirst"
+        @update:last="updatePaginationLast"
+        @update:next="updatePaginationNext"
+        @update:prev="updatePaginationPrev"
       ></SectionPagination>
     </div>
   </section>
