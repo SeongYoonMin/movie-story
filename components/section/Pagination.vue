@@ -4,9 +4,6 @@ interface IPaginationProps {
   total: number;
 }
 const props = defineProps<IPaginationProps>();
-const nowPage = ref<number>(props.page);
-const totalPage = ref<number>(props.total);
-
 const emits = defineEmits<{
   (e: "update:next", value: number): void;
   (e: "update:prev", value: number): void;
@@ -29,11 +26,11 @@ const lastEventHandle = (value: number) => {
 </script>
 
 <template>
-  <section class="pagination" v-if="totalPage && totalPage > 1 ">
+  <section class="pagination" v-if="props.total && props.total > 1 ">
     <button
       type="button"
       @click="firstEventHandle(1)"
-      v-if="nowPage !== 1 && nowPage - 2 > 0"
+      v-if="props.page !== 1 && props.page - 2 > 0"
       class="first"
       title="처음으로"
     >
@@ -41,25 +38,25 @@ const lastEventHandle = (value: number) => {
     </button>
     <button
       type="button"
-      @click="prevEventHandle(nowPage - 1)"
-      v-if="nowPage - 1 > 0"
+      @click="prevEventHandle(props.page - 1)"
+      v-if="props.page - 1 > 0"
       class="prev"
     >
-      {{ nowPage - 1 }}
+      {{ props.page - 1 }}
     </button>
-    <p class="now">{{ nowPage }}</p>
+    <p class="now">{{ props.page }}</p>
     <button
       type="button"
-      @click="nextEventHandle(nowPage + 1)"
-      v-if="totalPage > nowPage"
+      @click="nextEventHandle(props.page + 1)"
+      v-if="props.total > props.page"
       class="next"
     >
-      {{ nowPage + 1 }}
+      {{ props.page + 1 }}
     </button>
     <button
       type="button"
-      @click="lastEventHandle(totalPage)"
-      v-if="nowPage !== totalPage && nowPage + 2 <= totalPage"
+      @click="lastEventHandle(props.total)"
+      v-if="props.page !== props.total && props.page + 2 <= props.total"
       class="last"
       title="맨끝으로"
     >

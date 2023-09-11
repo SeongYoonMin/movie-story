@@ -46,6 +46,16 @@ const submitEvent = () => {
 const eventDetail = (id: number) => {
   router.push("/drama/" + id);
 };
+const updatePagination = (value: number) => {
+  router.push({
+    path: "/darama",
+    query: {
+      query: searchValue.value,
+      year: searchYear.value,
+      page: value,
+    },
+  });
+};
 </script>
 
 <template>
@@ -73,6 +83,10 @@ const eventDetail = (id: number) => {
         v-if="searchData.page"
         :page="searchData.page"
         :total="searchData.total_pages"
+        @update:first="updatePagination"
+        @update:last="updatePagination"
+        @update:next="updatePagination"
+        @update:prev="updatePagination"
       ></SectionPagination>
     </div>
   </section>

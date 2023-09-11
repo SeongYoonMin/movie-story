@@ -53,18 +53,18 @@ const eventDetail = (id: number) => {
   router.push("/movie/" + id);
 };
 
-const updatePaginationFirst = (value: number) => {
-  console.log(value);
+const updatePagination = (value: number) => {
+  router.push({
+    path: "/movie",
+    query: {
+      query: searchValue.value,
+      region: searchRegion.value,
+      year: searchYear.value,
+      page: value,
+    },
+  });
 };
-const updatePaginationLast = (value: number) => {
-  console.log(value);
-};
-const updatePaginationPrev = (value: number) => {
-  console.log(value);
-};
-const updatePaginationNext = (value: number) => {
-  console.log(value);
-};
+
 </script>
 
 <template>
@@ -91,13 +91,13 @@ const updatePaginationNext = (value: number) => {
         @event:detail="eventDetail"
       ></SectionSearchList>
       <SectionPagination
-        v-if="searchData.page"
+        v-if="searchData"
         :page="searchData.page"
         :total="searchData.total_pages"
-        @update:first="updatePaginationFirst"
-        @update:last="updatePaginationLast"
-        @update:next="updatePaginationNext"
-        @update:prev="updatePaginationPrev"
+        @update:first="updatePagination"
+        @update:last="updatePagination"
+        @update:next="updatePagination"
+        @update:prev="updatePagination"
       ></SectionPagination>
     </div>
   </section>
